@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		.table{width:800px;
+			   height:500px;
+			   border:1px solid black;
+			   margin:0px auto;
+			   position:relative;
+			   }
+		.table div{width:50px;
+				    height:50px;
+					border-radius:50%;
+					background-color:red;
+					position:absolute;
+					}
+	</style>
+</head>
+<body>
+   <div class="table">
+	
+   </div>
+   <script>
+		function Ball(name){
+		  this.Left=Math.round(Math.random()*750);
+		  this.Top=Math.round(Math.random()*450);
+		  this.Xdir=1;
+		  this.Ydir=1;
+		  this.Color=getColor()
+		  this.Id=name
+		  this.Obj=document.getElementById(this.Id)
+		  this.Move()
+		}
+		Ball.prototype.Move=function(){
+		   this.Obj.style.left=this.Left+"px"
+		    this.Obj.style.top=this.Top+"px"
+			this.Obj.style.backgroundColor=this.Color
+			this.Left+=this.Xdir
+			this.Top+=this.Ydir
+			if(this.Left>750){
+			this.Xdir=-1
+			}
+			if(this.Top>450){
+			this.Ydir=-1
+			}
+			if(this.Left<0){
+			this.Xdir=1
+			}
+			if(this.Top<0){
+			this.Ydir=1
+			}
+			setTimeout(this.Id+".Move()",2)
+			
+		}
+	    function getColor(){
+		   var red= Math.round(Math.random()*255)
+		   var green= Math.round(Math.random()*255)
+		   var blue= Math.round(Math.random()*255)
+		   return "rgb("+red+","+green+","+blue+")"
+		}
+		for(var i=0;i<10;i++){
+		   BallElement=document.createElement("div")
+		   BallElement.id="b"+i
+		   document.getElementsByClassName("table")[0].appendChild(BallElement)
+		   eval("b"+i+"=new Ball('b"+i+"')")
+		}
+		
+		
+		
+		
+		
+	  
+   </script>
+</body>
+</html>
